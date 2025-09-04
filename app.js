@@ -54,3 +54,9 @@ function lose(userChoice, computerChoice) {
 function draw(userChoice, computerChoice) {
     resultDiv.innerHTML = "Hòa Rồi 🤗 ";
 }
+//convert
+function convertKeyWords(letter) {
+    if (letter === "r") return "Búa";
+    if (letter === "p") return "Bao";
+    return "Kéo"
+}

@@ -37,3 +37,20 @@ function game(userChoice) {
             break;
     }
 }
+// check who wins
+// then display the result back on to the DOM
+function win(userChoice, computerChoice) {
+    userScore++;
+    userScoreSpan.innerHTML = userScore;
+    resultDiv.innerHTML = ` ${convertKeyWords(userChoice)} VS ${convertKeyWords(computerChoice)} 🔥 Bạn Thắng! `;
+}
+
+function lose(userChoice, computerChoice) {
+    computerScore++;
+    computerScoreSpan.innerHTML = computerScore;
+    resultDiv.innerHTML = ` máy đã chọn ${convertKeyWords(computerChoice)} 🤣 Bạn Thua! `;
+}
+
+function draw(userChoice, computerChoice) {
+    resultDiv.innerHTML = "Hòa Rồi 🤗 ";
+}

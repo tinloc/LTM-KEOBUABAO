@@ -1,4 +1,4 @@
-const socket = io("http://192.168.1.100:5000"); 
+const socket = io("http://192.168.1.100:5000");
 
 const userScoreSpan = document.querySelector("#user-score");
 const computerScoreSpan = document.querySelector("#computer-score");
@@ -10,17 +10,44 @@ const scissorsDiv = document.querySelector("#s");
 
 let userScore = 0;
 let computerScore = 0;
+let myRole = null;
 
-// Hiển thị trạng thái ghép cặp
+// Gán vai trò khi server thông báo
+socket.on('assign_role', (data) => {
+  myRole = data.role;
+  console.log("Vai trò của bạn:", myRole);
+});
+
+function setChoicesEnabled(enabled) {
+  rockDiv.style.pointerEvents = enabled ? "auto" : "none";
+  paperDiv.style.pointerEvents = enabled ? "auto" : "none";
+  scissorsDiv.style.pointerEvents = enabled ? "auto" : "none";
+}
+
+// Khi đang chờ người chơi
 socket.on('waiting', (data) => {
   document.getElementById("status").textContent = data.msg;
+  setChoicesEnabled(false);
 });
 
+// Khi đã ghép cặp thành công
 socket.on('start', (data) => {
   document.getElementById("status").textContent = data.msg;
+  setChoicesEnabled(true);
 });
 
-// Gửi sự kiện khi người chơi chọn
+// Khi đối thủ rời phòng
+socket.on('player_left', (data) => {
+  alert(data.msg);
+  document.getElementById("status").textContent = "Đối thủ đã rời game. Đang chờ người mới...";
+  setChoicesEnabled(false);
+  userScore = 0;
+  computerScore = 0;
+  userScoreSpan.textContent = userScore;
+  computerScoreSpan.textContent = computerScore;
+});
+
+// Gửi lựa chọn
 function main() {
   rockDiv.addEventListener("click", () => sendChoice("r"));
   paperDiv.addEventListener("click", () => sendChoice("p"));
@@ -35,17 +62,24 @@ function sendChoice(choice) {
 
 // Nhận kết quả từ server
 socket.on('round_result', (data) => {
-  const user = convertKeyWords(data.p1_choice);
-  const computer = convertKeyWords(data.p2_choice);
+  let myChoice, opponentChoice;
 
-  if (data.winner === 'player1') {
-    userScore++;
-    resultDiv.innerHTML = `🔥 ${user} VS ${computer} - Bạn Thắng! 🎉`;
-  } else if (data.winner === 'player2') {
-    computerScore++;
-    resultDiv.innerHTML = `😢 ${user} VS ${computer} - Máy Thắng!`;
+  if (myRole === 'player1') {
+    myChoice = convertKeyWords(data.p1_choice);
+    opponentChoice = convertKeyWords(data.p2_choice);
   } else {
-    resultDiv.innerHTML = `🤝 ${user} VS ${computer} - Hòa!`;
+    myChoice = convertKeyWords(data.p2_choice);
+    opponentChoice = convertKeyWords(data.p1_choice);
+  }
+
+  if (data.winner === myRole) {
+    userScore++;
+    resultDiv.innerHTML = `🔥 ${myChoice} VS ${opponentChoice} - Bạn Thắng! 🎉`;
+  } else if (data.winner === "draw") {
+    resultDiv.innerHTML = `🤝 ${myChoice} VS ${opponentChoice} - Hòa!`;
+  } else {
+    computerScore++;
+    resultDiv.innerHTML = `😢 ${myChoice} VS ${opponentChoice} - Đối thủ Thắng!`;
   }
 
   userScoreSpan.textContent = userScore;

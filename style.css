@@ -46,3 +46,44 @@ header > h1 {
     top: 30px;
     left: -25px;
 }
+
+#computer-label {
+    position: absolute;
+    top: 30px;
+    right: -30px;
+}
+
+.result {
+    font-size: 30px;
+    color: white;
+}
+
+.result > p {
+    text-align: center;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+}
+
+.choices {
+    margin: 50px 0;
+    text-align: center;
+    user-select: none;
+}
+
+.choice {
+    display: inline-block;
+    font-size: 60px;
+    padding: 20px 20px;
+    margin: 0 10px;
+    transition: all 0.3ms ease;
+}
+
+.choice:hover {
+    cursor: pointer;
+    transform: scale(2);
+}
+
+#action-message {
+    text-align: center;
+    color: #F0f0f0;
+}

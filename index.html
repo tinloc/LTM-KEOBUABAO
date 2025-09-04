@@ -1,54 +1,31 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Trò Chơi Kéo Búa Bao</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Chơi kéo búa bao với máy tính.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kéo Búa Bao Online</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1048/1048953.png">
+  <script src="/socket.io/socket.io.js"></script>
+  <script defer src="client.js"></script>
 </head>
-
 <body>
-  <!-- Container chính -->
-  <div class="game-container">
-    
-    <!-- Header -->
+  <div class="container">
     <header>
-      <h1>🎮 Trò Chơi Kéo Búa Bao</h1>
+      <h1>🎮 Kéo Búa Bao Online</h1>
+      <p>Kết nối và chơi với bạn bè!</p>
     </header>
 
-    <!-- Score Board -->
-    <div class="score-board">
-      <div id="user-label" class="badge">Bạn</div>
-      <div id="computer-label" class="badge">Máy</div>
-      <span id="user-score">0</span> :
-      <span id="computer-score">0</span>
-    </div>
+    <div id="messages"></div>
 
-    <!-- Kết quả -->
-    <div class="result">
-      <p>Bắt đầu chơi nào! ✨</p>
-    </div>
-
-    <!-- Lựa chọn -->
     <div class="choices">
-      <div class="choice" id="s" title="Kéo ✌️">
-        ✌️
-      </div>
-      <div class="choice" id="r" title="Búa ✊">
-        ✊
-      </div>
-      <div class="choice" id="p" title="Bao 🖐️">
-        🖐️
-      </div>
+      <button data-choice="r">✊ Búa</button>
+      <button data-choice="p">🖐️ Bao</button>
+      <button data-choice="s">✌️ Kéo</button>
     </div>
 
-    <!-- Tin nhắn hành động -->
-    <p id="action-message">Hãy chọn kéo, búa hoặc bao để bắt đầu.</p>
+    <div id="result" class="result">
+      <p>Hãy chọn kéo, búa hoặc bao...</p>
+    </div>
   </div>
-
-  <script src="app.js" defer></script>
 </body>
 </html>

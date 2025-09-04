@@ -16,3 +16,24 @@ function getComputerChoice() {
     return choices[randomNumber];
 }
 //console.log(getComputerChoice());
+// compare user's choices againts computer's choices
+function game(userChoice) {
+    const computerChoice = getComputerChoice();
+    switch (userChoice + computerChoice) {
+        case "rs":
+        case "pr":
+        case "sp":
+            win(userChoice, computerChoice);
+            break;
+        case "rs":
+        case "ps":
+        case "sr":
+            lose(userChoice, computerChoice);
+            break;
+        case "rr":
+        case "pp":
+        case "ss":
+            draw(userChoice, computerChoice);
+            break;
+    }
+}

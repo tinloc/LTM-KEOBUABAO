@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kéo Búa Bao Online</title>
+  <!-- Liên kết tới file CSS trong thư mục static -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <!-- Socket.IO -->
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
+  <!-- Liên kết file client.js -->
+  <script defer src="{{ url_for('static', filename='client.js') }}"></script>
+
+</head>
+<body>
+  <div class="container">
+    <!-- Tiêu đề -->
+    <header>
+      <h1>🎮 Trò Chơi Kéo Búa Bao</h1>
+    </header>
+
+    <!-- Trạng thái kết nối -->
+    <div id="status">Đang kết nối tới server...</div>
+
+    <!-- Bảng điểm -->
+    <div class="score-board">
+      <div id="user-label" class="badge">Bạn</div>
+      <div id="computer-label" class="badge">Người chơi khác</div>
+      <span id="user-score">0</span> : <span id="computer-score">0</span>
+    </div>
+
+    <!-- Các lựa chọn -->
+    <div class="choices">
+      <div class="choice" id="r">✊</div>
+      <div class="choice" id="p">🖐️</div>
+      <div class="choice" id="s">✌️</div>
+    </div>
+
+    <!-- Kết quả -->
+    <div class="result">
+      <p>Hãy chọn để bắt đầu!</p>
+    </div>
+  </div>
+</body>
+</html>

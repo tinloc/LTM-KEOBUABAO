@@ -6,6 +6,29 @@ const resultDiv = document.querySelector(".result > p"); // get the p tag inside
 const rockDiv = document.querySelector("#r");
 const paperDiv = document.querySelector("#p");
 const scissorsDiv = document.querySelector("#s");
+
+// default varibles, userScore and computerScore will be increased so we will use let to declare variable 
+let userScore = 0;
+let computerScore = 0;
+
+// function that takes value from individual buttons
+function main() {
+    rockDiv.addEventListener("click", function () {
+        game("r");
+    });
+
+    paperDiv.addEventListener("click", function () {
+        game("p");
+    });
+
+    scissorsDiv.addEventListener("click", function () {
+        game("s");
+    });
+}
+
+main();
+
+
 // make computer's choice (random choice between those 3 options)
 function getComputerChoice() {
     const choices = ["r", "p", "s"];
@@ -16,6 +39,8 @@ function getComputerChoice() {
     return choices[randomNumber];
 }
 //console.log(getComputerChoice());
+
+
 // compare user's choices againts computer's choices
 function game(userChoice) {
     const computerChoice = getComputerChoice();
@@ -37,6 +62,7 @@ function game(userChoice) {
             break;
     }
 }
+
 // check who wins
 // then display the result back on to the DOM
 function win(userChoice, computerChoice) {
@@ -54,6 +80,7 @@ function lose(userChoice, computerChoice) {
 function draw(userChoice, computerChoice) {
     resultDiv.innerHTML = "Hòa Rồi 🤗 ";
 }
+
 //convert
 function convertKeyWords(letter) {
     if (letter === "r") return "Búa";
